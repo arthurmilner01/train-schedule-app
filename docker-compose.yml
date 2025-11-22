@@ -1,0 +1,15 @@
+services:
+  train-schedule-app:
+    image: train-schedule-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        TRAIN_API_KEY: ${TRAIN_API_KEY}
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./train-schedule-app/src:/app/src
+      - ./train-schedule-app/public:/app/public
+    env_file:
+      - .env
