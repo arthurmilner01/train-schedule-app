@@ -7,9 +7,7 @@ services:
       args:
         TRAIN_API_KEY: ${TRAIN_API_KEY}
     ports:
-      - "5173:5173"
-    volumes:
-      - ./train-schedule-app/src:/app/src
-      - ./train-schedule-app/public:/app/public
+      - "80:80"
     env_file:
       - .env
+    restart: unless-stopped

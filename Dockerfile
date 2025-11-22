@@ -1,4 +1,4 @@
-FROM node:24-slim
+FROM node:24-slim AS build
 
 # Update and install security patches
 RUN apt-get update && apt-get upgrade -y && apt-get clean
@@ -17,7 +17,17 @@ RUN npm ci
 
 COPY train-schedule-app/ .
 
-# Port 5173
-EXPOSE 5173
-# Run the React app on port 5173
-CMD ["npm", "run", "dev", "--", "--host"]
+# Build the app
+RUN npm run build
+
+# Setup nginx to serve the built app
+FROM nginx:alpine
+
+# Copy custom nginx config
+COPY nginx.conf /etc/nginx/nginx.conf
+# Copy built app
+COPY --from=build /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
