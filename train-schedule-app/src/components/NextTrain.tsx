@@ -11,7 +11,7 @@ function NextTrain({ trainData }: NextTrainProps) {
             isBig = {true} />
         
             <div className="w-full overflow-hidden">
-                <p className="animate-scroll text-md">
+                <p className="animate-scroll text-lg">
                 Calling at: {trainData.calling_at.join(', ')}
                 </p>
             </div>

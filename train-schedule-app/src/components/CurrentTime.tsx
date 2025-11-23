@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { formatTime } from "../utils/helpers";
+import {useEffect, useState} from "react";
+import {formatTime} from "../utils/helpers";
 
 function CurrentTime() {
     const [currentTime, setCurrentTime] = useState(new Date())
@@ -15,12 +15,12 @@ function CurrentTime() {
     return (
         <div className="w-full flex flex-row 
         items-center justify-center">
-            <p className="text-4xl">
+            <p className="text-5xl">
                 {formatTime(currentTime)}
             </p>
         </div>
     )
-};
+}
 
 export default CurrentTime;
 

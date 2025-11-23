@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 @import "tailwindcss";
 
 
 :root {
-    --background: oklch(0% 0 0);
+    --background: oklch(12% 0.03 60);
     --foreground: oklch(100% 0.00011 271.152);
 
-    --color-train-text: oklch(0.88 0.17 95);
-    
+    --color-train-text: oklch(0.82 0.25 60);
+
     --warning: oklch(0.84 0.16 84);
     --warning-foreground: oklch(0.28 0.07 46);
 }
@@ -15,13 +15,13 @@
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
-    
+
     --color-train-text: var(--color-train-text);
 
     --color-warning: var(--warning);
     --color-warning-foreground: var(--warning-foreground);
 
-    --font-family-train: 'Orbitron', monospace;
+    --font-family-train: 'DotGothic16', monospace;
 
     --animate-scroll: scroll 20s linear infinite;
     --animate-scroll-destination: scroll-destination 20s linear infinite;
@@ -45,6 +45,39 @@
     }
 }
 
+@keyframes flicker {
+    0%, 100% {
+        opacity: 1;
+    }
+    3% {
+        opacity: 0.95;
+    }
+    6% {
+        opacity: 1;
+    }
+    7% {
+        opacity: 0.95;
+    }
+    8% {
+        opacity: 1;
+    }
+    9% {
+        opacity: 1;
+    }
+    10% {
+        opacity: 0.85;
+    }
+    11% {
+        opacity: 1;
+    }
+    40% {
+        opacity: 0.98;
+    }
+    41% {
+        opacity: 1;
+    }
+}
+
 body {
     background: var(--background);
     color: var(--foreground);
@@ -52,14 +85,18 @@ body {
 }
 
 .font-family-train {
-    text-shadow: 
-    0 0 5px currentColor,
-    0 0 10px currentColor;
-    letter-spacing: 0.05em;
-    filter: contrast(1.1) brightness(1.05);
+    color: var(--color-train-text);
+    text-shadow: 0 0 4px var(--color-train-text),
+    0 0 8px var(--color-train-text),
+    0 0 16px var(--color-train-text);
+    letter-spacing: 0.08em;
+    font-weight: 900;
+    filter: contrast(1.15) brightness(1.1) blur(0.01em);
+    position: relative;
+    animation: flicker 4s infinite;
 }
 
-.font-family-train::before {
+.font-family-train::after {
     content: '';
     position: absolute;
     top: 0;
@@ -67,11 +104,9 @@ body {
     right: 0;
     bottom: 0;
     background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.05) 0px,
-    transparent 1px,
-    transparent 2px,
-    rgba(0, 0, 0, 0.05) 3px
+            to bottom,
+            transparent 0px,
+            transparent 2px,
+            rgba(0, 0, 0, 0.25) 3px
     );
-    pointer-events: none;
 }

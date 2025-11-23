@@ -1,7 +1,7 @@
 export type TrainData = {
     train_time: string;
     train_destination: string;
-    platform: string | number;
+    platform: string;
     expected_time: string;
     calling_at: string[];
 }
@@ -25,8 +25,26 @@ export type TrainApiResponse = {
         }>;
         subsequentCallingPoints?: Array<{
             callingPoint: Array<{
-            locationName: string;
+                locationName: string;
             }>;
         }>;
     }>;
+};
+
+export type TrainService = {
+    std: string;
+    etd: string;
+    platform: string;
+    destination: {
+        locationName: string;
+    }[];
+    subsequentCallingPoints?: {
+        callingPoint: {
+            locationName: string;
+        }[];
+    }[];
+};
+
+export type CallingPoint = {
+    locationName: string;
 };
