@@ -17,7 +17,7 @@ RUN npm ci
 
 COPY train-schedule-app/ .
 
-# Build the app
+# Build the app 
 RUN npm run build
 
 # Setup nginx to serve the built app
